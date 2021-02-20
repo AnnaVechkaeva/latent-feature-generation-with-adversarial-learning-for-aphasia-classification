@@ -1,5 +1,7 @@
 # Latent Feature Generation with Adversarial Learning for Aphasia Classification
 
+To cite:
+
 ```
 @inproceedings{vechkaeva2020latent,
   title={Latent Feature Generation with Adversarial Learning for Aphasia Classification},
