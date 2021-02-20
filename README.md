@@ -1,1 +1,2 @@
-# latent-feature-generation-with-adversarial-learning-for-aphasia-classification
+# Latent Feature Generation with Adversarial Learning for Aphasia Classification
+
