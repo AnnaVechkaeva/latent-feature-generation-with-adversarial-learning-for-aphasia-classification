@@ -7,7 +7,7 @@
 #
 # Label ids: 0 = Anomic, 1 = Broca, 2 = Conduction, 3 = Control.
 #
-# Original file name: generating_data.py (2019). Code below is unchanged.
+# Original 2019 code below, unchanged.
 
 import tensorflow as tf
 from keras.models import model_from_json

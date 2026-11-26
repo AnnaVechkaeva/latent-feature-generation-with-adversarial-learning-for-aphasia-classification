@@ -5,7 +5,7 @@
 # Note: test_images / test_labels are commented out, so the validation_data line needs
 # them to be loaded first (as was done in 03_gan_experiments.ipynb).
 #
-# Original file name: CNN_classification.py (2020). Code below is unchanged.
+# Original 2020 code below, unchanged.
 
 from __future__ import absolute_import, division, print_function
 import json

@@ -9,7 +9,7 @@
 # from the MNIST example, although only labels 0-3 occur in the data.
 # "epochs" in train() are training iterations (one batch each).
 #
-# Original file name: W-cGAN.py (2020). Code below is unchanged.
+# Original 2020 code below, unchanged.
 
 from __future__ import print_function, division
 

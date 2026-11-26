@@ -18,24 +18,24 @@ Each subject's label is then predicted from the predictions for their utterances
 
 Run the steps in order, from a folder that contains the data files each step reads and writes.
 
-| Step | File | Paper | Original file name |
-|---|---|---|---|
-| 1. Clean the AphasiaBank CHAT transcripts, extract the WAB labels | `code/01_preprocess_aphasiabank.py` | Sec. 3.2 | `data_preprocessing.py` |
-| 2. Patient-wise train/test split, word2vec 28×300 utterance matrices | `code/02_vectorize_and_split.ipynb` | Sec. 3.2–3.3, Table 2 | `DataVectors_preprocess.ipynb` |
-| 3. Train the cGAN and conditional WGAN, run the utterance classifier experiments | `code/03_gan_experiments.ipynb` | Sec. 3.4.3, 3.5.1–3.5.2, Tables 4–5 | `Untitled3.ipynb` |
-| 3b. Conditional WGAN as a standalone script | `code/03b_train_wcgan.py` | Sec. 3.4.3 | `W-cGAN.py` |
-| 4. Generate synthetic utterance vectors with a trained generator | `code/04_generate_synthetic_data.py` | Sec. 3.5.2 | `generating_data.py` |
-| 5. Train the utterance-level classifier | `code/05_train_utterance_classifier.py` | Sec. 3.4.1 | `CNN_classification.py` |
-| 6. Subject-level evaluation with the Max Class model (MC-1 … MC-7) | `code/06_evaluate_max_class.py` | Sec. 3.5.3, Tables 4–7 | `2lv_eval.py` |
-| 7. Two-part training split, supervised subject-level classifiers (NB, MNB, DT, RF, KNN, SVM) | `code/07_subject_level_supervised.ipynb` | Sec. 3.5.4, Tables 3, 8, 9 | `Untitled5.ipynb` |
+| Step | File | Paper |
+|---|---|---|
+| 1. Clean the AphasiaBank CHAT transcripts, extract the WAB labels | `code/01_preprocess_aphasiabank.py` | Sec. 3.2 |
+| 2. Patient-wise train/test split, word2vec 28×300 utterance matrices | `code/02_vectorize_and_split.ipynb` | Sec. 3.2–3.3, Table 2 |
+| 3. Train the cGAN and conditional WGAN, run the utterance classifier experiments | `code/03_gan_experiments.ipynb` | Sec. 3.4.3, 3.5.1–3.5.2, Tables 4–5 |
+| 3b. Conditional WGAN as a standalone script | `code/03b_train_wcgan.py` | Sec. 3.4.3 |
+| 4. Generate synthetic utterance vectors with a trained generator | `code/04_generate_synthetic_data.py` | Sec. 3.5.2 |
+| 5. Train the utterance-level classifier | `code/05_train_utterance_classifier.py` | Sec. 3.4.1 |
+| 6. Subject-level evaluation with the Max Class model (MC-1 … MC-7) | `code/06_evaluate_max_class.py` | Sec. 3.5.3, Tables 4–7 |
+| 7. Two-part training split, supervised subject-level classifiers (NB, MNB, DT, RF, KNN, SVM) | `code/07_subject_level_supervised.ipynb` | Sec. 3.5.4, Tables 3, 8, 9 |
 
 Additional notebooks in `code/analysis/` (not needed to reproduce the results):
 
-| File | What it does | Original file name |
-|---|---|---|
-| `dataset_stats.ipynb` | Average WAB score and age per group | `Dataset_stats.ipynb` |
-| `utterance_stats.ipynb` | Number and length of utterances per group | `Untitled6.ipynb` |
-| `mode_collapse.ipynb` | PCA / t-SNE plots for checking generated data for mode collapse | `mode_collapse.ipynb` |
+| File | What it does |
+|---|---|
+| `dataset_stats.ipynb` | Average WAB score and age per group |
+| `utterance_stats.ipynb` | Number and length of utterances per group |
+| `mode_collapse.ipynb` | PCA / t-SNE plots for checking generated data for mode collapse |
 
 Label ids used throughout: `0 = Anomic, 1 = Broca, 2 = Conduction, 3 = Control`.
 
@@ -61,9 +61,12 @@ report `tf.keras` 2.1.6-tf). The code uses TF1-only APIs such as `tf.ConfigProto
 
 These are in the original code and were deliberately left unchanged:
 
-* In step 2 the test vector array starts with one duplicated row. The notebook therefore
-  uses `test_images[1:]`, but `06_evaluate_max_class.py` and the evaluation cells in step 7
-  index vectors and labels without the offset.
+* In step 2 the test vector array starts with one duplicated row. The utterance-level
+  evaluation accounts for it (`test_images[1:]`), but `06_evaluate_max_class.py` and the
+  evaluation cells in step 7 do not. As a result, one of each test subject's utterance
+  predictions comes from the neighbouring utterance, which almost always belongs to a
+  subject of the same class. This affects about 1% of the predictions and should not
+  influence the results much.
 * The train/test split takes the first 30 subjects per class in `os.walk` order, so it
   depends on the file system order.
 * The GAN generators and discriminators/critics are fully connected networks, and the paper

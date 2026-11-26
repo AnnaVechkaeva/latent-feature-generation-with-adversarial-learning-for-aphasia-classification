@@ -6,7 +6,7 @@
 # Expects the raw transcripts in ./aphasia/English_scripts/ (output folders must exist).
 # Controls were processed the same way by pointing data_path at the control transcripts.
 #
-# Original file name: data_preprocessing.py (2019). Code below is unchanged.
+# Original 2019 code below, unchanged.
 
 import os
 import re

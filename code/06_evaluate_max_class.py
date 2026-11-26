@@ -4,7 +4,7 @@
 # divided by a constant: change `d[3] = d[3]/1` to /2 ... /7 for MC-2 ... MC-7.
 # Prints accuracy, confusion matrix, classification report (F1) and per-class accuracy.
 #
-# Original file name: 2lv_eval.py (2020). Code below is unchanged.
+# Original 2020 code below, unchanged.
 
 import tensorflow as tf
 from keras.models import model_from_json
