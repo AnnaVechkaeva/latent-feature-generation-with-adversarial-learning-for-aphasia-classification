@@ -127,3 +127,18 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Data and models are not part of this repository (AphasiaBank requires membership)
+*.cha
+*.cdc
+*.clean
+*.npy
+*.h5
+*.bin
+*.ckpt*
+aphasia/
+clean*/
+data/
+models/
+results/
+.DS_Store

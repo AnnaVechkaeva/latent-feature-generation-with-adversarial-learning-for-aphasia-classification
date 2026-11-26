@@ -1,0 +1,10 @@
+# Environment used for the experiments (2019-2020): Python 3.6.
+# Exact versions of the packages other than Keras and TensorFlow were not recorded.
+tensorflow>=1.12,<2.0   # TF1 APIs (tf.ConfigProto, tf.Session) are used
+keras==2.2.4
+numpy
+scikit-learn
+gensim
+nltk
+matplotlib
+jupyter
